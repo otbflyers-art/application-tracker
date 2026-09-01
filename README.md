@@ -7,6 +7,25 @@ open, what you've applied to, and what's still worth checking by hand.
 
 No API keys needed — every endpoint queried is public.
 
+## The button (GitHub Actions)
+
+The tracker updates itself with a click, no local install required:
+
+1. Go to this repo on github.com → **Actions** tab → **Update IB Tracker**
+   (left sidebar) → **Run workflow** button.
+2. Optionally type a class year (defaults to `2027`), then **Run workflow**.
+3. It fetches every bank, commits any newly found openings straight into
+   `IB_FT_Analyst_Recruiting_Tracker.xlsx` on this branch, and posts a
+   summary of what's new on the run's page — so you don't even have to
+   open the spreadsheet to see if anything changed.
+
+To have it run automatically instead of clicking the button, open
+`.github/workflows/update-tracker.yml` and uncomment the `schedule:` block
+(a cron trigger — e.g. every weekday morning).
+
+Everything below covers running it yourself locally, which the workflow
+above also does under the hood.
+
 ## Setup
 
 ```bash
@@ -85,9 +104,14 @@ each ATS platform's known response shape.
 
 ## Notes
 
-- The generated `.xlsx`, `ib_tracker_update_log.json`, and
-  `ib_checker_seen.json` files are personal data (which banks you're
-  tracking, application status, notes) — they're gitignored, not committed.
+- `IB_FT_Analyst_Recruiting_Tracker.xlsx` and `ib_tracker_update_log.json`
+  are tracked in git — the GitHub Actions workflow commits updates to them
+  after every run, so the button in the previous section has something to
+  push to. If you'd rather keep this data out of the repo entirely, add
+  both paths back to `.gitignore` and instead download the workbook as a
+  workflow artifact (or run everything locally — see below).
+- `ib_checker_seen.json` (used only by the local-only `check` command) stays
+  gitignored — it's just a small cache, not meaningful history.
 - Some banks (Goldman Sachs, UBS, Evercore, Centerview, etc.) don't expose a
   public job-search API; they're listed in `NO_PUBLIC_API` with a note on
   why and a link to check by hand.

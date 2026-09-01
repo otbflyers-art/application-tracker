@@ -1,0 +1,68 @@
+name: Update IB Tracker
+
+on:
+  workflow_dispatch:
+    inputs:
+      class_year:
+        description: "Class year to search for"
+        required: false
+        default: "2027"
+  # Uncomment to also run automatically every weekday morning (13:00 UTC):
+  # schedule:
+  #   - cron: "0 13 * * 1-5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-tracker-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ib-tracker
+        run: pip install -e .
+
+      - name: Create tracker workbook if missing
+        env:
+          CLASS_YEAR: ${{ github.event.inputs.class_year || '2027' }}
+        run: |
+          if [ ! -f IB_FT_Analyst_Recruiting_Tracker.xlsx ]; then
+            ib-tracker init --class-year "$CLASS_YEAR"
+          fi
+
+      - name: Run update
+        env:
+          CLASS_YEAR: ${{ github.event.inputs.class_year || '2027' }}
+        run: ib-tracker update --class-year "$CLASS_YEAR" | tee update_output.txt
+
+      - name: Write run summary
+        if: always()
+        run: |
+          {
+            echo "## IB Tracker update — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            echo
+            echo '```'
+            cat update_output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit tracker changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add IB_FT_Analyst_Recruiting_Tracker.xlsx ib_tracker_update_log.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-update IB tracker ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
