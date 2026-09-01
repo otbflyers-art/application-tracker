@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+
+# Personal tracker data — generated locally, not shared in the repo.
+IB_FT_Analyst_Recruiting_Tracker.xlsx
+ib_tracker_update_log.json
+ib_checker_seen.json
