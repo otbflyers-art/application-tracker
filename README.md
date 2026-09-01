@@ -10,6 +10,18 @@ open, what you've applied to, and what's still worth checking by hand.
 ever reaches the tracker. See `src/ib_tracker/location.py` if you want to
 loosen or tighten that.
 
+**Entry-level only** — titles that read like a promoted/lateral hire
+("Senior Analyst", "Analyst II", "AVP", "Principal", ...) are dropped. A
+handful of banks (Bank of America, Moelis, Perella Weinberg, Rothschild &
+Co, Houlihan Lokey) don't have a separately scrapeable campus/new-grad
+feed — their only public API is their lateral/experienced-hire board — so
+for those five, a bare "Investment Banking Analyst" title isn't enough on
+its own; it also needs an explicit campus/class-year signal (a year,
+"analyst program", "campus", "graduate", ...) before it counts. See
+`src/ib_tracker/seniority.py`. This is title-based judgment, same as the
+rest of the filtering — most ATS search APIs only return a title, not a
+full job description, to judge against.
+
 No API keys needed — every endpoint queried is public.
 
 ## The button (GitHub Actions)
@@ -92,6 +104,9 @@ All three commands accept `--class-year YYYY` (default `2027`).
   Trading, Research, or an unclear "verify division" bucket).
 - `src/ib_tracker/location.py` — keyword-based US/non-US location filter
   applied to every fetched posting (same heuristic style as the classifier).
+- `src/ib_tracker/seniority.py` — keyword-based entry-level filter (drops
+  "Senior Analyst"/"Analyst II"/AVP/etc., and requires an explicit
+  campus/class-year signal for banks whose only feed is a lateral board).
 - `src/ib_tracker/fetchers.py` — one function per ATS platform (Workday,
   Oracle Cloud HCM, Greenhouse, Lever, Eightfold AI, JibeApply, RSS,
   SmartRecruiters, iCIMS), each returning a plain list of job dicts.

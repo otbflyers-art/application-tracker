@@ -20,6 +20,7 @@ from .banks import BANKS, NO_PUBLIC_API, BankSource
 from .config import BANK_PAUSE_SECONDS, HEADERS, Config
 from .fetchers import FetchContext
 from .location import is_us_posting
+from .seniority import is_entry_level
 
 
 def build_session() -> requests.Session:
@@ -35,14 +36,23 @@ def fetch_all(
     on_bank_done: Callable[[BankSource, list[dict]], None] | None = None,
 ) -> list[tuple[BankSource, list[dict]]]:
     """Query every bank in the registry. Returns [(bank, jobs), ...] in
-    registry order. Each job dict is tagged with its bank's category, and
-    non-US postings are filtered out (see location.is_us_posting)."""
+    registry order. Each job dict is tagged with its bank's category;
+    non-US postings (location.is_us_posting) and non-entry-level postings
+    (seniority.is_entry_level) are filtered out."""
     session = session or build_session()
     ctx = FetchContext(class_year=cfg.class_year, search_terms=cfg.search_terms, session=session)
     results = []
     for bank in BANKS:
         jobs = bank.fetch(ctx, bank.name, **bank.kwargs)
         jobs = [j for j in jobs if is_us_posting(j.get("loc", ""), j.get("title", ""))]
+        jobs = [
+            j for j in jobs
+            if is_entry_level(
+                j.get("title", ""),
+                class_year=cfg.class_year,
+                requires_entry_signal=bank.requires_entry_signal,
+            )
+        ]
         for j in jobs:
             j["category"] = bank.category
         if on_bank_done:

@@ -18,6 +18,12 @@ class BankSource:
     fetch: Callable[..., list[dict]]
     kwargs: dict[str, Any] = field(default_factory=dict)
     careers_url: str = ""
+    # True for banks whose only public feed is their lateral/experienced-hire
+    # board (their campus/new-grad recruiting isn't separately scrapeable).
+    # A bare "Investment Banking Analyst" title there is ambiguous — it could
+    # be backfilling an experienced seat — so seniority.is_entry_level()
+    # additionally requires an explicit campus/class-year signal for these.
+    requires_entry_signal: bool = False
 
 
 @dataclass(frozen=True)
@@ -41,7 +47,7 @@ BANKS: list[BankSource] = [
                "https://careers.jpmorgan.com/us/en/students/programs/investment-banking-analyst"),
     BankSource("Bank of America", "Bulge Bracket", "Workday", fetchers.fetch_workday,
                {"tenant": "ghr", "wd_num": 1, "site": "Lateral-US"},
-               "https://campus.bankofamerica.com"),
+               "https://campus.bankofamerica.com", requires_entry_signal=True),
     BankSource("Citi", "Bulge Bracket", "Workday", fetchers.fetch_workday,
                {"tenant": "citi", "wd_num": 5, "site": "2"},
                "https://jobs.citi.com/category/banking-full-time-analyst"),
@@ -67,16 +73,16 @@ BANKS: list[BankSource] = [
                "https://pjtpartners.wd1.myworkdayjobs.com/PJT"),
     BankSource("Moelis & Company", "Elite Boutique", "Workday", fetchers.fetch_workday,
                {"tenant": "moelis", "wd_num": 1, "site": "Experienced-Hires"},
-               "https://moelis.wd1.myworkdayjobs.com/Experienced-Hires"),
+               "https://moelis.wd1.myworkdayjobs.com/Experienced-Hires", requires_entry_signal=True),
     BankSource("Guggenheim Securities", "Elite Boutique", "Workday", fetchers.fetch_workday,
                {"tenant": "guggenheim", "wd_num": 1, "site": "Guggenheim_Careers_Campus"},
                "https://guggenheim.wd1.myworkdayjobs.com/Guggenheim_Careers_Campus"),
     BankSource("Perella Weinberg Partners", "Elite Boutique", "Workday", fetchers.fetch_workday,
                {"tenant": "pwp", "wd_num": 1, "site": "PWP_Experienced_Opportunities"},
-               "https://pwp.wd1.myworkdayjobs.com/PWP_Experienced_Opportunities"),
+               "https://pwp.wd1.myworkdayjobs.com/PWP_Experienced_Opportunities", requires_entry_signal=True),
     BankSource("Rothschild & Co", "Elite Boutique", "Workday", fetchers.fetch_workday,
                {"tenant": "rothschildandco", "wd_num": 3, "site": "Rothschildandco_Lateral"},
-               "https://www.rothschildandco.com/en/careers/graduate"),
+               "https://www.rothschildandco.com/en/careers/graduate", requires_entry_signal=True),
     BankSource("Lazard", "Elite Boutique", "Oracle Cloud HCM", fetchers.fetch_oracle,
                {"host": "icbpjb.fa.ocs.oraclecloud.com"},
                "https://lazard.wd1.myworkdayjobs.com/lazard"),
@@ -84,7 +90,7 @@ BANKS: list[BankSource] = [
     # ── Middle Market ────────────────────────────────────────────────────
     BankSource("Houlihan Lokey", "Middle Market", "Workday", fetchers.fetch_workday,
                {"tenant": "hl", "wd_num": 1, "site": "Lateral"},
-               "https://hl.wd1.myworkdayjobs.com/Lateral"),
+               "https://hl.wd1.myworkdayjobs.com/Lateral", requires_entry_signal=True),
     BankSource("Piper Sandler", "Middle Market", "Workday", fetchers.fetch_workday,
                {"tenant": "pipersandler", "wd_num": 501, "site": "Piper_Sandler_Careers"},
                "https://pipersandler.wd501.myworkdayjobs.com/Piper_Sandler_Careers"),
