@@ -16,6 +16,7 @@ import datetime
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.worksheet.worksheet import Worksheet
 
 from .banks import BankSource, ManualBank
@@ -52,6 +53,21 @@ SEARCH_LOG_COLS = [
 
 HEADER_ROW = 3
 FIRST_DATA_ROW = 4
+
+MASTER_TABLE_NAME = "JobTracker"
+
+# Sort order for the Master Job Tracker's default view — "job type" groups
+# together, Investment Banking first since that's the primary target.
+DIVISION_SORT_ORDER = {
+    "Investment Banking": 0,
+    "Markets / Sales & Trading": 1,
+    "Research": 2,
+    "FT Analyst Program (verify division)": 3,
+}
+
+
+def _division_sort_key(division: str) -> int:
+    return DIVISION_SORT_ORDER.get(division, 99)
 
 
 def _fill(hex_color: str) -> PatternFill:
@@ -94,6 +110,24 @@ def _write_header_row(ws: Worksheet, cols: list[str], row: int = HEADER_ROW) -> 
     ws.freeze_panes = f"A{FIRST_DATA_ROW}"
 
 
+def _apply_table(ws: Worksheet, name: str, ref: str, style: str = "TableStyleMedium2") -> None:
+    """Turn a header+data range into a real Excel Table: gives it filter/sort
+    dropdown arrows on the header row and banded rows, in Excel, Google
+    Sheets, and LibreOffice alike."""
+    if name in ws.tables:
+        del ws.tables[name]
+    table = Table(displayName=name, ref=ref)
+    table.tableStyleInfo = TableStyleInfo(
+        name=style, showRowStripes=True, showFirstColumn=False,
+        showLastColumn=False, showColumnStripes=False,
+    )
+    ws.add_table(table)
+
+
+def _set_autofilter(ws: Worksheet, ref: str) -> None:
+    ws.auto_filter.ref = ref
+
+
 def _write_title_and_banner(ws: Worksheet, title: str, banner: str, n_cols: int) -> None:
     last_col = get_column_letter(n_cols)
     ws.merge_cells(f"A1:{last_col}1")
@@ -128,6 +162,7 @@ def build_tracker_workbook(class_year: str, banks: list[BankSource], manual_bank
     _write_header_row(ws_master, MASTER_COLS)
     for ci, name in enumerate(MASTER_COLS, 1):
         ws_master.column_dimensions[get_column_letter(ci)].width = 16 if name != "Notes" else 30
+    _apply_table(ws_master, MASTER_TABLE_NAME, f"A{HEADER_ROW}:{get_column_letter(len(MASTER_COLS))}{HEADER_ROW}")
 
     ws_univ = wb.create_sheet("Bank Coverage Universe")
     _write_title_and_banner(ws_univ, "Bank Coverage Universe", "Refreshed on every `ib-tracker update` run.", len(BANK_UNIV_COLS))
@@ -143,12 +178,14 @@ def build_tracker_workbook(class_year: str, banks: list[BankSource], manual_bank
         row += 1
     for ci, _name in enumerate(BANK_UNIV_COLS, 1):
         ws_univ.column_dimensions[get_column_letter(ci)].width = 18
+    _set_autofilter(ws_univ, f"A{HEADER_ROW}:{get_column_letter(len(BANK_UNIV_COLS))}{row - 1}")
 
     ws_log = wb.create_sheet("Search Log")
     _write_title_and_banner(ws_log, "Search Log", "One row per bank per `ib-tracker update` run.", len(SEARCH_LOG_COLS))
     _write_header_row(ws_log, SEARCH_LOG_COLS)
     for ci, _name in enumerate(SEARCH_LOG_COLS, 1):
         ws_log.column_dimensions[get_column_letter(ci)].width = 20
+    _set_autofilter(ws_log, f"A{HEADER_ROW}:{get_column_letter(len(SEARCH_LOG_COLS))}{HEADER_ROW}")
 
     return wb
 
@@ -196,6 +233,7 @@ def write_job_row(ws: Worksheet, row: int, job: dict, seq: int) -> None:
         "Division / Group": job.get("division", ""),
         "Job Title": job["title"],
         "Job Type": "Full-Time Analyst",
+        "Location": job.get("loc", ""),
         "Posting Status": "Open",
         "Priority": "High",
         "Application Link": job["link"],
@@ -221,6 +259,66 @@ def write_job_row(ws: Worksheet, row: int, job: dict, seq: int) -> None:
     dsp_cell.number_format = "0"
 
     ws.row_dimensions[row].height = 18
+
+
+def finalize_master_sheet(ws: Worksheet, new_links: set[str] | None = None) -> None:
+    """Re-sort every job row by division ("job type" — Investment Banking,
+    then Markets, Research, unclear), renumber them, restyle them (only
+    rows newly found in this run get the highlight), and (re)apply the
+    Excel Table over the full range so the header row's filter/sort
+    dropdowns cover every row. Call this once per `update` run, after all
+    per-bank rows have been appended."""
+    new_links = new_links or set()
+    n_cols = len(MASTER_COLS)
+    link_idx = col_index("Application Link") - 1
+    division_idx = col_index("Division / Group") - 1
+    bank_idx = col_index("Bank Name") - 1
+    title_idx = col_index("Job Title") - 1
+
+    rows = [
+        list(row)
+        for row in ws.iter_rows(min_row=FIRST_DATA_ROW, max_row=ws.max_row, max_col=n_cols, values_only=True)
+        if row[link_idx]
+    ]
+    rows.sort(key=lambda r: (_division_sort_key(r[division_idx] or ""), r[bank_idx] or "", r[title_idx] or ""))
+
+    last_row = max(ws.max_row, FIRST_DATA_ROW + len(rows) - 1) if rows else ws.max_row
+    for r in range(FIRST_DATA_ROW, last_row + 1):
+        for c in range(1, n_cols + 1):
+            ws.cell(r, c).value = None
+
+    posting_col = get_column_letter(col_index("Posting Date"))
+    dsp_col = col_index("Days Since Posted")
+    seq_col = col_index("#")
+
+    for i, values in enumerate(rows):
+        row_num = FIRST_DATA_ROW + i
+        is_new = values[link_idx] in new_links
+        for ci, val in enumerate(values, 1):
+            val = (i + 1) if ci == seq_col else val
+            cell = ws.cell(row=row_num, column=ci, value=val)
+            cell.border = _border()
+            col_name = MASTER_COLS[ci - 1]
+            cell.alignment = _center() if col_name in (
+                "#", "Posting Status", "Priority", "Job Type", "Date First Found", "Date Last Checked"
+            ) else _left()
+            if is_new:
+                cell.fill = _fill(LIGHT_GRN)
+                cell.font = Font(name="Arial", size=9, bold=True)
+            else:
+                cell.fill = PatternFill(fill_type=None)
+                cell.font = Font(name="Arial", size=9)
+        ws.cell(row_num, dsp_col).value = f'=IF({posting_col}{row_num}="","",TODAY()-{posting_col}{row_num})'
+        ws.cell(row_num, dsp_col).number_format = "0"
+        ws.row_dimensions[row_num].height = 18
+
+    table_last_row = FIRST_DATA_ROW + len(rows) - 1 if rows else HEADER_ROW
+    _apply_table(ws, MASTER_TABLE_NAME, f"A{HEADER_ROW}:{get_column_letter(n_cols)}{table_last_row}")
+
+
+def refresh_search_log_filter(ws_log: Worksheet) -> None:
+    """Search Log grows every run — widen its autofilter to cover all rows."""
+    _set_autofilter(ws_log, f"A{HEADER_ROW}:{get_column_letter(len(SEARCH_LOG_COLS))}{ws_log.max_row}")
 
 
 def update_search_log(ws_log: Worksheet, bank_name: str, jobs: list[dict], checked_at: str) -> None:

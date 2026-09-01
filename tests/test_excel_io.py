@@ -23,6 +23,8 @@ def test_build_tracker_workbook_has_expected_sheets_and_headers():
     ws_master = wb["Master Job Tracker"]
     header = [c.value for c in ws_master[excel_io.HEADER_ROW]]
     assert header == excel_io.MASTER_COLS
+    # A real Excel Table gives the header row filter/sort dropdown arrows.
+    assert excel_io.MASTER_TABLE_NAME in ws_master.tables
 
     ws_univ = wb["Bank Coverage Universe"]
     header = [c.value for c in ws_univ[excel_io.HEADER_ROW]]
@@ -30,10 +32,12 @@ def test_build_tracker_workbook_has_expected_sheets_and_headers():
     # Bank rows are pre-populated: one automated bank, one manual-check bank.
     bank_names = [row[1].value for row in ws_univ.iter_rows(min_row=excel_io.FIRST_DATA_ROW) if row[1].value]
     assert bank_names == ["Test Bank", "No API Bank"]
+    assert ws_univ.auto_filter.ref is not None
 
     ws_log = wb["Search Log"]
     header = [c.value for c in ws_log[excel_io.HEADER_ROW]]
     assert header == excel_io.SEARCH_LOG_COLS
+    assert ws_log.auto_filter.ref is not None
 
 
 def test_write_job_row_and_existing_links_roundtrip(tmp_path):
@@ -94,3 +98,53 @@ def test_update_coverage_universe_and_search_log(tmp_path):
     assert values[6] == "Yes"
     assert values[7] == 1
     assert "Investment Banking Analyst" in values[8]
+
+
+def test_finalize_master_sheet_sorts_by_division_and_highlights_new_rows():
+    banks, manual = _sample_banks()
+    wb = excel_io.build_tracker_workbook("2027", banks, manual)
+    ws_master = wb["Master Job Tracker"]
+
+    # Written out of order and out of sequence — finalize should fix both.
+    jobs = [
+        {"bank": "Test Bank", "title": "Research Analyst", "division": "Research",
+         "link": "https://example.com/jobs/research", "category": "Bulge Bracket"},
+        {"bank": "Test Bank", "title": "Investment Banking Analyst", "division": "Investment Banking",
+         "link": "https://example.com/jobs/ib", "category": "Bulge Bracket"},
+        {"bank": "Test Bank", "title": "Markets Analyst", "division": "Markets / Sales & Trading",
+         "link": "https://example.com/jobs/markets", "category": "Bulge Bracket"},
+    ]
+    for i, job in enumerate(jobs, 1):
+        row = excel_io.next_empty_row(ws_master)
+        excel_io.write_job_row(ws_master, row, job, seq=i)
+
+    # Only the IB and Markets postings are "new" in this run.
+    excel_io.finalize_master_sheet(ws_master, new_links={
+        "https://example.com/jobs/ib", "https://example.com/jobs/markets",
+    })
+
+    divisions = [
+        row[excel_io.col_index("Division / Group") - 1]
+        for row in ws_master.iter_rows(min_row=excel_io.FIRST_DATA_ROW, values_only=True)
+        if row[excel_io.col_index("Application Link") - 1]
+    ]
+    assert divisions == ["Investment Banking", "Markets / Sales & Trading", "Research"]
+
+    seqs = [
+        row[excel_io.col_index("#") - 1]
+        for row in ws_master.iter_rows(min_row=excel_io.FIRST_DATA_ROW, values_only=True)
+        if row[excel_io.col_index("Application Link") - 1]
+    ]
+    assert seqs == [1, 2, 3]
+
+    def _fill_color(row_offset, col_name):
+        cell = ws_master.cell(excel_io.FIRST_DATA_ROW + row_offset, excel_io.col_index(col_name))
+        return cell.fill.fgColor.rgb
+
+    assert _fill_color(0, "Job Title") == "00" + excel_io.LIGHT_GRN  # Investment Banking row is new
+    assert _fill_color(1, "Job Title") == "00" + excel_io.LIGHT_GRN  # Markets row is new
+    assert _fill_color(2, "Job Title") != "00" + excel_io.LIGHT_GRN  # Research row is not new this run
+
+    # The Table's range grows to cover all three rows.
+    table = ws_master.tables[excel_io.MASTER_TABLE_NAME]
+    assert table.ref == f"A{excel_io.HEADER_ROW}:{excel_io.get_column_letter(len(excel_io.MASTER_COLS))}{excel_io.FIRST_DATA_ROW + 2}"

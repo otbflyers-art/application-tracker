@@ -5,6 +5,11 @@ public career-site APIs and keeps an Excel tracker (`IB_FT_Analyst_Recruiting_Tr
 up to date, so the spreadsheet stays your single source of truth for what's
 open, what you've applied to, and what's still worth checking by hand.
 
+**US roles only** — anything whose location or title points outside the US
+(e.g. Toronto, Mumbai, London, Frankfurt, Dubai...) is filtered out before it
+ever reaches the tracker. See `src/ib_tracker/location.py` if you want to
+loosen or tighten that.
+
 No API keys needed — every endpoint queried is public.
 
 ## The button (GitHub Actions)
@@ -46,6 +51,15 @@ This creates `IB_FT_Analyst_Recruiting_Tracker.xlsx` in the current
 directory with three sheets — `Master Job Tracker`, `Bank Coverage
 Universe`, and `Search Log` — with the bank universe pre-populated.
 
+`Master Job Tracker` is a real Excel Table, not just a plain grid: every
+column header has a filter/sort dropdown arrow built in (click one to filter
+by bank, division, location, whatever), and the header row stays frozen
+while you scroll. Every `update` run also re-sorts the rows by division —
+Investment Banking first, then Markets / Sales & Trading, then Research —
+so postings of the same "job type" sit together by default, and highlights
+in green whichever rows were newly found *in that run* (older rows lose the
+highlight on the next run, so green always means "new since last time").
+
 **Update the tracker (run regularly, e.g. daily via cron/launchd):**
 
 ```bash
@@ -76,6 +90,8 @@ All three commands accept `--class-year YYYY` (default `2027`).
   whether a job title/description is a target full-time analyst role, and
   which division it belongs to (Investment Banking, Markets / Sales &
   Trading, Research, or an unclear "verify division" bucket).
+- `src/ib_tracker/location.py` — keyword-based US/non-US location filter
+  applied to every fetched posting (same heuristic style as the classifier).
 - `src/ib_tracker/fetchers.py` — one function per ATS platform (Workday,
   Oracle Cloud HCM, Greenhouse, Lever, Eightfold AI, JibeApply, RSS,
   SmartRecruiters, iCIMS), each returning a plain list of job dicts.

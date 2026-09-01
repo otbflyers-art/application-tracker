@@ -19,6 +19,7 @@ from . import excel_io
 from .banks import BANKS, NO_PUBLIC_API, BankSource
 from .config import BANK_PAUSE_SECONDS, HEADERS, Config
 from .fetchers import FetchContext
+from .location import is_us_posting
 
 
 def build_session() -> requests.Session:
@@ -34,12 +35,14 @@ def fetch_all(
     on_bank_done: Callable[[BankSource, list[dict]], None] | None = None,
 ) -> list[tuple[BankSource, list[dict]]]:
     """Query every bank in the registry. Returns [(bank, jobs), ...] in
-    registry order. Each job dict is tagged with its bank's category."""
+    registry order. Each job dict is tagged with its bank's category, and
+    non-US postings are filtered out (see location.is_us_posting)."""
     session = session or build_session()
     ctx = FetchContext(class_year=cfg.class_year, search_terms=cfg.search_terms, session=session)
     results = []
     for bank in BANKS:
         jobs = bank.fetch(ctx, bank.name, **bank.kwargs)
+        jobs = [j for j in jobs if is_us_posting(j.get("loc", ""), j.get("title", ""))]
         for j in jobs:
             j["category"] = bank.category
         if on_bank_done:
@@ -175,6 +178,10 @@ def run_update(cfg: Config, *, dry_run: bool = False, stream=sys.stdout) -> list
         print(f"  Checking {mb.name:<35}→ Skipped ({mb.note})", file=stream)
         if not dry_run:
             excel_io.update_coverage_universe(ws_univ, mb.name, mb.note, today_str)
+
+    if not dry_run:
+        excel_io.finalize_master_sheet(ws_master, new_links={j["link"] for j in all_new})
+        excel_io.refresh_search_log_filter(ws_log)
 
     if not dry_run and all_new:
         base_text = re.sub(r"\s*\|\s*Last auto-updated:.*$", "", ws_master["A2"].value or "")
