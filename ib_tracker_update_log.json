@@ -1782,5 +1782,482 @@
         "category": "Foreign Bank"
       }
     ]
+  },
+  {
+    "run_at": "2026-09-01T20:09:27.962320",
+    "dry_run": false,
+    "new_roles": 47,
+    "roles": [
+      {
+        "bank": "Morgan Stanley",
+        "title": "Fixed Income Research \u2013 Securitized Products Strategist  Analyst",
+        "division": "Markets / Sales & Trading",
+        "loc": "New York, New York, United States of America",
+        "posted": "Posted 11 Days Ago",
+        "link": "https://ms.wd5.myworkdayjobs.com/en-US/External/job/New-York-New-York-United-States-of-America/Fixed-Income-Research---Securitized-Products-Strategist--Analyst_JR042147-1",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Small-Cap Investment Banking - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-08-10",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210778877",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Strategic Investment Group - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-08-18",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210782168",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Healthcare - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-01-27",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210706007",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Healthcare - Analyst",
+        "division": "Investment Banking",
+        "loc": "San Francisco, CA, United States",
+        "posted": "2026-02-26",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210716451",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Media & Communications - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2025-12-11",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210693656",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Strategic Investment Group, Infrastructure - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2025-05-12",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210626089",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Leveraged Finance - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-03-17",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210725578",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Consumer & Retail - Analyst",
+        "division": "Investment Banking",
+        "loc": "Los Angeles, CA, United States",
+        "posted": "2026-08-05",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210777857",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Financial Institutions Group, Banks - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-08-24",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210784213",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Financial Institutions Group - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-04-06",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210733219",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Investment Banking - Infrastructure Finance and Advisory - Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-05-18",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210749950",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "2027 Commercial & Investment Bank Markets Full-Time Analyst Program - Research",
+        "division": "Markets / Sales & Trading",
+        "loc": "New York, NY, United States",
+        "posted": "2026-07-14",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210763120",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "US Equity Research - Homebuilding & Building Products - Analyst",
+        "division": "Research",
+        "loc": "New York, NY, United States",
+        "posted": "2026-08-31",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210771944",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "US Equity Research - Retailing - Hardlines/Broadlines - Analyst",
+        "division": "Research",
+        "loc": "New York, NY, United States",
+        "posted": "2026-09-01",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210745261",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "J.P. Morgan",
+        "title": "Quantitative Trading & Research - Equity Derivatives Exotics - Analyst",
+        "division": "Markets / Sales & Trading",
+        "loc": "New York, NY, United States",
+        "posted": "2026-08-07",
+        "link": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210770118",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Citi",
+        "title": "Investment Banking Sr Analyst - Healthcare",
+        "division": "Investment Banking",
+        "loc": "New York New York United States",
+        "posted": "Posted 30+ Days Ago",
+        "link": "https://citi.wd5.myworkdayjobs.com/en-US/2/job/New-York-New-York-United-States/Investment-Banking-Sr-Analyst---Healthcare_26980270",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Citi",
+        "title": "Investment Banking Sr Analyst - Financial Institutions",
+        "division": "Investment Banking",
+        "loc": "New York New York United States",
+        "posted": "Posted 18 Days Ago",
+        "link": "https://citi.wd5.myworkdayjobs.com/en-US/2/job/New-York-New-York-United-States/Investment-Banking-Sr-Analyst---Financial-Institutions_26985022",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Citi",
+        "title": "Equity Research Analyst, SMID Biotech",
+        "division": "Research",
+        "loc": "New York New York United States",
+        "posted": "Posted 20 Days Ago",
+        "link": "https://citi.wd5.myworkdayjobs.com/en-US/2/job/New-York-New-York-United-States/Equity-Research-Analyst--SMID-Biotech_26986970",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Citi",
+        "title": "Equity Research Analyst, Information Services",
+        "division": "Research",
+        "loc": "New York New York United States",
+        "posted": "Posted 18 Days Ago",
+        "link": "https://citi.wd5.myworkdayjobs.com/en-US/2/job/New-York-New-York-United-States/Equity-Research-Analyst--Information-Services_26987685",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Citi",
+        "title": "Markets - Commodities, Full-Time Analyst, Houston - US, 2027",
+        "division": "Markets / Sales & Trading",
+        "loc": "Houston Texas United States",
+        "posted": "Posted 30+ Days Ago",
+        "link": "https://citi.wd5.myworkdayjobs.com/en-US/2/job/Houston-Texas-United-States/Markets---Commodities--Full-Time-Analyst--Houston---US--2027_26978728",
+        "source": "Workday",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Jefferies",
+        "title": "Investment Banking Analyst \u2013 Strategic Finance and Shareholder Engagement & Activism Advisory",
+        "division": "Investment Banking",
+        "loc": "New York, NY, United States",
+        "posted": "2026-04-23",
+        "link": "https://hdid.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/4166",
+        "source": "Oracle Cloud HCM",
+        "category": "Bulge Bracket"
+      },
+      {
+        "bank": "Guggenheim Securities",
+        "title": "2027 Guggenheim Securities Investment Banking Analyst - Richmond Healthcare Services (Pharma Services)",
+        "division": "Investment Banking",
+        "loc": "Richmond, VA \u2013 U.S.",
+        "posted": "Posted Today",
+        "link": "https://guggenheim.wd1.myworkdayjobs.com/en-US/Guggenheim_Careers_Campus/job/Richmond-VA--US/XMLNAME-2027-Guggenheim-Securities-Investment-Banking-Analyst---Richmond-Healthcare-Services--Pharma-Services-_14902",
+        "source": "Workday",
+        "category": "Elite Boutique"
+      },
+      {
+        "bank": "Guggenheim Securities",
+        "title": "2027 Guggenheim Securities Investment Banking Analyst \u2013 New York Capital Structure Advisory Group (Restructuring)",
+        "division": "Investment Banking",
+        "loc": "New York City, NY \u2013 U.S.",
+        "posted": "Posted 26 Days Ago",
+        "link": "https://guggenheim.wd1.myworkdayjobs.com/en-US/Guggenheim_Careers_Campus/job/New-York-City-NY--US/XMLNAME-2027-Guggenheim-Securities-Investment-Banking-Analyst---New-York-Capital-Structure-Advisory-Group--Restructuring-_14846",
+        "source": "Workday",
+        "category": "Elite Boutique"
+      },
+      {
+        "bank": "Lazard",
+        "title": "Equity Research Analyst - US Healthcare",
+        "division": "Research",
+        "loc": "New York, United States",
+        "posted": "2026-08-24",
+        "link": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/6406",
+        "source": "Oracle Cloud HCM",
+        "category": "Elite Boutique"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Investment Banking Analyst",
+        "division": "Investment Banking",
+        "loc": "Atlanta, GA",
+        "posted": "Posted 20 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/Atlanta-GA/Investment-Banking-Analyst_R-100645-1",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Investment Banking Analyst - ECM",
+        "division": "Investment Banking",
+        "loc": "Minneapolis, MN - HQ",
+        "posted": "Posted 30+ Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/Minneapolis-MN---HQ/Investment-Banking-Analyst---ECM_R-100609",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "2027 Investment Banking Analyst \u2013 Technology",
+        "division": "Investment Banking",
+        "loc": "San Francisco, CA",
+        "posted": "Posted 14 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/San-Francisco-CA/XMLNAME-2027-Investment-Banking-Analyst---Technology_R-100634",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Public Finance Investment Banking Analyst",
+        "division": "Investment Banking",
+        "loc": "Leawood, KS",
+        "posted": "Posted 26 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/Leawood-KS/Public-Finance-Investment-Banking-Analyst_R-100601-1",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "2027 Investment Banking Analyst - Boston Technology",
+        "division": "Investment Banking",
+        "loc": "Boston, MA",
+        "posted": "Posted 11 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/Boston-MA/XMLNAME-2027-Investment-Banking-Analyst---Boston-Technology_R-100654",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Campus Recruiting - 2027 Investment Banking Analyst - Chemicals",
+        "division": "Investment Banking",
+        "loc": "New York, NY",
+        "posted": "Posted 6 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/New-York-NY/Investment-Banking-Analyst---Chemicals_R-100667",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Campus Recruiting - 2027 Investment Banking Analyst - Healthcare",
+        "division": "Investment Banking",
+        "loc": "New York, NY",
+        "posted": "Posted 5 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/New-York-NY/Campus-Recruiting---2027-Investment-Banking-Analyst---Healthcare_R-100668",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "2027 Investment Banking Analyst \u2013 Energy, Power & Infrastructure (Upstream)",
+        "division": "Investment Banking",
+        "loc": "Houston 4, TX-Main Street",
+        "posted": "Posted 20 Days Ago",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/Houston-4-TX-Main-Street/XMLNAME-2027-Investment-Banking-Analyst---Energy--Power---Infrastructure_R-100633",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Piper Sandler",
+        "title": "Campus Recruiting - 2027 Investment Banking Analyst - Secondary Capital Advisory",
+        "division": "Investment Banking",
+        "loc": "New York, NY",
+        "posted": "Posted Yesterday",
+        "link": "https://pipersandler.wd501.myworkdayjobs.com/en-US/Piper_Sandler_Careers/job/New-York-NY/Campus-Recruiting---2027-Investment-Banking-Analyst---Secondary-Capital-Advisory_R-100673",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Lincoln International",
+        "title": "2027 Full-Time Analyst, Valuations & Opinions Group ",
+        "division": "FT Analyst Program (verify division)",
+        "loc": "Atlanta, GA; Dallas, TX; New York City, NY; San Francisco, CA",
+        "posted": "2026-08-31",
+        "link": "http://www.lincolninternational.com/greenhouse/?gh_jid=8060090",
+        "source": "Greenhouse",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Leerink Partners",
+        "title": "Investment Banking ECM Analyst",
+        "division": "Investment Banking",
+        "loc": "USA NY New York",
+        "posted": "Posted 11 Days Ago",
+        "link": "https://leerink.wd5.myworkdayjobs.com/en-US/leerinkpartners/job/USA-NY-New-York/Investment-Banking-ECM-Analyst_R00662",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Leerink Partners",
+        "title": "Investment Banking Analyst",
+        "division": "Investment Banking",
+        "loc": "USA CA Santa Monica",
+        "posted": "Posted 11 Days Ago",
+        "link": "https://leerink.wd5.myworkdayjobs.com/en-US/leerinkpartners/job/USA-CA-Santa-Monica/Investment-Banking-Analyst_R00661",
+        "source": "Workday",
+        "category": "Middle Market"
+      },
+      {
+        "bank": "Mizuho (+ Greenhill)",
+        "title": "Mizuho | Greenhill - Investment Banking M&A Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY (1271 AOA/6th Ave)",
+        "posted": "Posted 30+ Days Ago",
+        "link": "https://mizuho.wd1.myworkdayjobs.com/en-US/mizuhoamericas/job/New-York-NY-1271-AOA6th-Ave/Mizuho---Greenhill---Investment-Banking-M-A-Analyst_R7138",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "Mizuho (+ Greenhill)",
+        "title": "Investment & Corporate Banking - Financial Sponsors & Strategic Solutions Group (FS&SSG) \u2013 Analyst",
+        "division": "Investment Banking",
+        "loc": "New York, NY (1271 AOA/6th Ave)",
+        "posted": "Posted 30+ Days Ago",
+        "link": "https://mizuho.wd1.myworkdayjobs.com/en-US/mizuhoamericas/job/New-York-NY-1271-AOA6th-Ave/Investment---Corporate-Banking---Financial-Sponsors---Strategic-Solutions-Group--FS-SSG----Analyst_R6766-1",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "Investment Banking Analyst - Healthcare",
+        "division": "Investment Banking",
+        "loc": "Nashville, TN",
+        "posted": "Posted 6 Days Ago",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/Nashville-TN/Investment-Banking-Analyst---Healthcare_10075617-WD-1",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "Investment Banking Analyst - Charlotte - Intrepid (Full-Time 2027)",
+        "division": "Investment Banking",
+        "loc": "Charlotte, NC",
+        "posted": "Posted 12 Days Ago",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/Charlotte-NC/Investment-Banking-Analyst---Charlotte---Intrepid--Full-Time-2027-_10078773-WD",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "Investment Banking Analyst - Nashville - Intrepid (Full-Time 2027)",
+        "division": "Investment Banking",
+        "loc": "Nashville, TN",
+        "posted": "Posted 12 Days Ago",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/Nashville-TN/Investment-Banking-Analyst---Nashville---Intrepid--Full-Time-2027-_10078947-WD",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "Investment Banking Analyst - New York -  Intrepid (Full-Time 2027)",
+        "division": "Investment Banking",
+        "loc": "New York, NY",
+        "posted": "Posted 12 Days Ago",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/New-York-NY/Investment-Banking-Analyst---New-York----Intrepid--Full-Time-2027-_10078813-WD",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "Investment Banking Analyst - Los Angeles - Intrepid (Full-Time 2027)",
+        "division": "Investment Banking",
+        "loc": "Los Angeles, CA",
+        "posted": "Posted 12 Days Ago",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/Los-Angeles-CA/Investment-Banking-Analyst---Los-Angeles---Intrepid--Full-Time-2027-_10078814-WD",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "MUFG",
+        "title": "2027 Corporate, Investment Banking and Markets (CIB&M) Full-Time Analyst Program \u2013 Sponsor Finance & Direct Lending | New York",
+        "division": "Investment Banking",
+        "loc": "New York, NY",
+        "posted": "Posted Today",
+        "link": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/New-York-NY/XMLNAME-2027-Corporate--Investment-Banking-and-Markets--CIB-M--Full-Time-Analyst-Program---Sponsor-Finance---Direct-Lending---New-York_10079135-WD-1",
+        "source": "Workday",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "Scotiabank",
+        "title": "Analyst, Corporate Finance Advisory (New York City, NY, US, 10281)",
+        "division": "Investment Banking",
+        "loc": "",
+        "posted": "",
+        "link": "https://jobs.scotiabank.com/job/New-York-City-Analyst%2C-Corporate-Finance-Advisory-NY-10281/603574617/",
+        "source": "RSS Feed",
+        "category": "Foreign Bank"
+      },
+      {
+        "bank": "Scotiabank",
+        "title": "Analyst, Mortgage Capital Markets, Global Capital Markets (Houston, TX, US, 77002)",
+        "division": "Investment Banking",
+        "loc": "",
+        "posted": "",
+        "link": "https://jobs.scotiabank.com/job/Houston-Analyst%2C-Mortgage-Capital-Markets%2C-Global-Capital-Markets-TX-77002/592295317/",
+        "source": "RSS Feed",
+        "category": "Foreign Bank"
+      }
+    ]
   }
 ]
